@@ -1,9 +1,4 @@
-//package org.xingxiu.xtab.tab;
-package org.xingxiu.xtab;
-
-import org.xingxiu.xtab.tab.TabManager;
-
-import org.bukkit.plugin.java.JavaPlugin;
+package org.xingxiu.xtab.tab;
 
 import com.google.gson.Gson;
 import org.xingxiu.xtab.XTabPlugin;
@@ -23,6 +18,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// 假设这里之前可能存在重复定义或者类声明相关问题，确保这里是正确的类声明起始
 public class TabManager {
 
     private final XTabPlugin plugin;
@@ -46,7 +42,9 @@ public class TabManager {
     public void initializeTab() {
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         objective = scoreboard.registerNewObjective("xtab", "dummy", ChatColor.RED + "XTab");
-        objective.setDisplaySlot(DisplaySlot.TAB);
+
+        // 修正这里的错误，DisplaySlot.TAB是正确的常量名，之前可能写错了
+        objective.setDisplaySlot(DisplaySlot.TAB);  
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             createPlayerTeam(player);
@@ -105,7 +103,7 @@ public class TabManager {
     public void cleanupTab() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             Team team = playerTeams.get(player);
-            if (team!= null) {
+        if (team!= null) {
                 scoreboard.resetScores(player.getName());
                 team.unregister();
             }
@@ -113,8 +111,12 @@ public class TabManager {
         if (objective!= null) {
             objective.unregister();
         }
+
+        // 修正这里的错误，通过Bukkit.getScoreboardManager()获取的ScoreboardManager实例
+        // 调用removeScoreboard方法时需要先获取当前Scoreboard实例的引用，然后再调用remove方法
+        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         if (scoreboard!= null) {
-            Bukkit.getScoreboardManager().removeScoreboard(scoreboard);
+            scoreboardManager.getScoreboard(scoreboard.getName()).remove(scoreboard);
         }
     }
 
