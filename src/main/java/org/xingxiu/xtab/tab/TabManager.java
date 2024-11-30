@@ -1,5 +1,11 @@
 package org.xingxiu.xtab.tab;
 
+package org.xingxiu.xtab;
+
+import org.xingxiu.xtab.tab.TabManager;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.google.gson.Gson;
 import org.xingxiu.xtab.XTabPlugin;
 import org.bukkit.Bukkit;
