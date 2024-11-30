@@ -1,5 +1,4 @@
-package org.xingxiu.xtab.tab;
-
+//package org.xingxiu.xtab.tab;
 package org.xingxiu.xtab;
 
 import org.xingxiu.xtab.tab.TabManager;
