@@ -1,0 +1,23 @@
+name: Build XTab Plugin
+
+on:
+  push:
+    branches:
+      - main # 你可以根据需要修改这里，指定触发构建的分支，比如'master'、'develop'等
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3 # 检出项目代码到GitHub Actions运行环境中
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests # 使用Maven进行构建，跳过测试（如果你的项目测试还未完善，可以先跳过）
