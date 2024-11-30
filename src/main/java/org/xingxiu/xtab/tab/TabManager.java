@@ -24,7 +24,7 @@ public class TabManager {
     private Scoreboard scoreboard;
     private Objective objective;
     private final Map<Player, Team> playerTeams = new HashMap<>();
-    +private final Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private final Config config;
 
     public TabManager(XTabPlugin plugin) {
@@ -51,7 +51,7 @@ public class TabManager {
         startServerUsageUpdateTask();
     }
 
-    private void createPlayerTeam(player) {
+    private void createPlayerTeam(Player player) {
         Team team = scoreboard.registerNewTeam(player.getName());
         team.addEntry(player.getName());
         playerTeams.put(player, team);
@@ -89,11 +89,11 @@ public class TabManager {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         Team team = playerTeams.get(player);
                         if (team!= null) {
-                        team.setPrefix(ChatColor.YELLOW + serverUsageInfo);
+                            team.setPrefix(ChatColor.YELLOW + serverUsageInfo);
                         }
                     }
                 }
-        }
+            }
         }.runTaskTimer(plugin, 0L, 20L);
     }
 
